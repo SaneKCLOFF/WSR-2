@@ -101,6 +101,7 @@ namespace Variant2.Axyonov.ViewModels
             SortBox.Add("По типу продукта");
             SortBox.Add("По стоимость");
             SortBox.Add("По артикулу");
+            //
         }
         private void CreatedFullTableItems()
         {
