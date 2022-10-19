@@ -1,0 +1,105 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Variant2.Axyonov.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Variant2.Axyonov.Views.MainWindow"
+        Icon="/Assets/Icon.ico"
+        Title="Variant2.Axyonov">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.15*"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Image Source="/Assets/Logo.png"
+			   Grid.RowSpan="2"
+			   Opacity=".2"
+			   Margin="0,3,0,0"/>
+		<StackPanel Orientation="Horizontal"
+					Grid.Row="0"
+					Margin="0,3,0,0">
+			<Image Source="/Assets/Logo.png"
+				   Margin="10,0,0,0"
+				   Height="60"
+				   Width="60"
+				   Stretch="Uniform"/>
+			<TextBox Height="45"
+					 Width="350"
+					 Margin="20,0,0,0"
+					 Text="{Binding Search}"
+					 HorizontalContentAlignment="Center"
+					 VerticalContentAlignment="Center"/>
+		</StackPanel>
+		<StackPanel Grid.Row="0"
+					Orientation="Horizontal"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Center"
+					Margin="0,3,0,0">
+			<ComboBox Height="45"
+					  Width="140"
+					  Margin="30,0,0,0"
+					  Items="{Binding SortBox}"
+					  SelectedItem="{Binding SelectedSortItem}"
+					  PlaceholderText="Сортировка"/>
+			<ComboBox Height="45"
+					  Width="140"
+					  Margin="20,0,20,0"
+					  SelectedItem="{Binding SelectedFiltherItem}"
+					  Items="{Binding FiltherBox}"
+					  PlaceholderText="Фильтрация"/>
+		</StackPanel>
+		<ListBox
+				Items="{Binding ViewTableItems}"
+				Grid.Row="1"
+				Background="Transparent">
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="ListBoxItem">
+								<Border Margin="0,4,0,4"
+										Background="Transparent">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="100"/>
+											<ColumnDefinition/>
+											<ColumnDefinition/>
+										</Grid.ColumnDefinitions>
+										<Image Source="{Binding Image}"
+											   Grid.Column="0"
+											   Height="100"
+											   Width="100"
+											   Margin="20,0,0,0"/>
+										<StackPanel Grid.Column="1"
+													Orientation="Vertical"
+													VerticalAlignment="Center"
+													Margin="20,0,0,0">
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Text="{Binding ProductTypeTitle}"/>
+												<TextBlock Text=" | "/>
+												<TextBlock Text="{Binding ProductTitle}"/>
+											</StackPanel>
+											<TextBlock Text="{Binding ArticleNumber}"/>
+											<TextBlock Text="{Binding MaterialTitle,StringFormat=Материалы: {0}}"
+													   MaxLines="3"/>
+										</StackPanel>
+										<TextBlock Text="{Binding MinCostForAgent, StringFormat={}{0:C}}"
+													   HorizontalAlignment="Right"
+													   Margin="0,0,10,10"
+												   Grid.Column="2"
+												   VerticalAlignment="Center"/>
+									</Grid>
+								</Border>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</ListBox.Styles>
+		</ListBox>
+	</Grid>
+</Window>
