@@ -19,11 +19,53 @@ namespace Variant2.Axyonov.ViewModels
         private string _selectedFiltherItem = null!;
         private string _selectedSortItem = null!;
 
-        public List<TableItem> TableItems { get => _tableItems; set => _tableItems = value; }
-        public List<TableItem> ViewTableItems { get => _viewTableItems; set => _viewTableItems = value; }
-        public List<ProductMaterial> ProductMaterials { get => _productMaterials; set => _productMaterials = value; }
-        public List<string> FiltherBox { get => _filtherBox; set => _filtherBox = value; }
-        public List<string> SortBox { get => _sortBox; set => _sortBox = value; }
+        public List<TableItem> TableItems 
+        { 
+            get => _tableItems; 
+            set
+            {
+                _tableItems = value;
+                OnPropertyChanged(nameof(TableItems));
+            }
+        }
+        public List<TableItem> ViewTableItems
+        { 
+            get => _viewTableItems; 
+            set
+            {
+                _viewTableItems = value;
+                OnPropertyChanged(nameof(ViewTableItems));
+            }
+        }
+        public List<ProductMaterial> ProductMaterials 
+        { 
+            get => _productMaterials; 
+            set
+            {
+                _productMaterials = value;
+                OnPropertyChanged(nameof(ProductMaterials));
+            }
+        }
+        public List<string> FiltherBox
+        { 
+            get => _filtherBox;
+            set
+            {
+                _filtherBox = value;
+                OnPropertyChanged(nameof(FiltherBox));
+            }
+        }
+        public List<string> SortBox 
+        { 
+            get => _sortBox;
+            set
+            {
+                _sortBox = value;
+                OnPropertyChanged(nameof(SortBox));
+            }
+        }
+
+
         public string SelectedFiltherItem 
         { 
             get => _selectedFiltherItem;
@@ -31,7 +73,8 @@ namespace Variant2.Axyonov.ViewModels
             {
                 _selectedFiltherItem = value;
                 Filthering(value);
-                
+                OnPropertyChanged(nameof(SelectedFiltherItem));
+
             }
         }
         public string SelectedSortItem 
@@ -41,6 +84,7 @@ namespace Variant2.Axyonov.ViewModels
             {
                 _selectedSortItem = value;
                 Sorting(value);
+                OnPropertyChanged(nameof(SelectedSortItem));
             }
         }
         private void Sorting(string str)
