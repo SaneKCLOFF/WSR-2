@@ -1,0 +1,40 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:vm="using:Variant2.Axyonov.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+        x:Class="Variant2.Axyonov.Views.AddProductWindow"
+        Title="AddProductWindow"
+		WindowStartupLocation="CenterScreen">
+	<!--<Design.DataContext>
+		<vm:AddProductViewModel/>
+	</Design.DataContext>-->
+
+	<Grid>
+		<StackPanel Orientation="Vertical">
+			<ComboBox
+				Items="{Binding Path=ProductsList}"
+				SelectedItem="{Binding ProductItem}"
+				PlaceholderText="Продукт">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Title}"/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+			<ComboBox
+				Items="{Binding Path=MaterialsList}"
+				SelectedItem="{Binding MaterialItem}"
+				PlaceholderText="Материалы">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Title}"/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+			<TextBox Text="{Binding CountText}"/>
+		</StackPanel>
+	</Grid>
+
+</Window>

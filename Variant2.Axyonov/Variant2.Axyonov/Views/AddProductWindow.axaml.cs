@@ -3,12 +3,12 @@ using Variant2.Axyonov.ViewModels;
 
 namespace Variant2.Axyonov.Views
 {
-    public partial class MainWindow : Window
+    public partial class AddProductWindow : Window
     {
-        public MainWindow()
+        public AddProductWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+            DataContext = new AddProductViewModel();
         }
     }
 }

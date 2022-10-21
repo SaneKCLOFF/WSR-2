@@ -2,6 +2,7 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Variant2.Axyonov.ViewModels
@@ -9,11 +10,16 @@ namespace Variant2.Axyonov.ViewModels
     public class ViewModelBase : INotifyPropertyChanged
     {
 
+        #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName = null)
+
+        public void OnPropertyChanged([CallerMemberName] string? name = null)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            if (name != null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            }
         }
+        #endregion
     }
 }

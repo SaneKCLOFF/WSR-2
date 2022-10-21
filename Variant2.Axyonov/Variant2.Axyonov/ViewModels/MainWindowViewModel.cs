@@ -1,15 +1,19 @@
 using Avalonia.Media.Imaging;
 using Microsoft.EntityFrameworkCore;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using Variant2.Axyonov.Models;
+using Variant2.Axyonov.Views;
 
 namespace Variant2.Axyonov.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    internal class MainWindowViewModel : ViewModelBase
     {
+        #region Data
         private List<string> _filtherBox = new();
         private List<string> _sortBox = new();
         private List<TableItem> _tableItems = new();
@@ -87,9 +91,10 @@ namespace Variant2.Axyonov.ViewModels
                 OnPropertyChanged(nameof(SelectedSortItem));
             }
         }
+        #endregion
         private void Sorting(string str)
         {
-            var list = TableItems;
+            var list = ViewTableItems;
             if (str == "По типу продукта" || str=="")
             {
                 TableItems = list.OrderBy(p => p.ProductTypeTitle).ToList();
@@ -130,6 +135,7 @@ namespace Variant2.Axyonov.ViewModels
         {
             CreatedFullTableItems();
             CreateSortingAndFilteringList();
+            AddNewProductCommand = ReactiveCommand.Create(OpenAddProductWindow);
         }
         private void CreateSortingAndFilteringList()
         {
@@ -145,7 +151,6 @@ namespace Variant2.Axyonov.ViewModels
             SortBox.Add("По типу продукта");
             SortBox.Add("По стоимость");
             SortBox.Add("По артикулу");
-            //
         }
         private void CreatedFullTableItems()
         {
@@ -187,6 +192,12 @@ namespace Variant2.Axyonov.ViewModels
                 }
                 ViewTableItems = TableItems;
             }
+        }
+        public ReactiveCommand<Unit,Unit> AddNewProductCommand { get; }
+        private void OpenAddProductWindow()
+        {
+            AddProductWindow addProductWindow = new AddProductWindow();
+            addProductWindow.Show();
         }
         public class TableItem
         {
